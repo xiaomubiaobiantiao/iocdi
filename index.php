@@ -2,11 +2,82 @@
 
 header("Content-type:text/html;charset=utf-8");
 
-include( 'Container.class.php' );
+include( 'ContainerOne.class.php' );
 include( 'A.class.php' );
-include( 'C.class.php' );
-// include( 'B.class.php' );
+// include( 'C.class.php' );
+include( 'B.class.php' );
+// include( 'Super.class.php' );
+// ---------------------------------------------------------------
+// include( 'AController.class.php' );
+// include( 'AService.class.php' );
+// include( 'AModel.class.php' );
+// include( 'ContainerMe.class.php' );
+// ---------------------------------------------------------------
 
+class Test {
+	public $model;
+	public function __construct( Super $model ) {
+		$this->model = $model;
+	}
+
+	public function dazhao() {
+		$this->model->connection();
+	}
+
+}
+
+$container = new ContainerOne();
+
+// function abc( $p1, $p2 ) {
+// 	return new $p1;
+// }
+// $container->bind( 'A', function( $container ){
+// 	return new A;
+// });
+// $container->bind('superman', function($container, $moduleName) {
+//     return new Superman($container->make($moduleName));
+// });
+// $container->bind( 'A', 'B' );
+// $container->bind( 'A', 'B' );
+
+// $container->bind( 'A', $container );
+
+// $container->bind( 'Test' );
+
+$container->bind( 'A' );
+$container->bind( 'B' );
+$container->bind( 'Test', 'B' );
+
+$supername_1 = $container->make( 'Test' );
+$supername_1->dazhao();
+
+// $container->getBind();
+
+
+
+
+
+// $aa = $container->make( 'A' );
+// $aa->say();
+
+
+// $aa = $container->make( 'A' );
+
+
+
+// $bb = $container->make( 'B' );
+// dump( $bb );
+
+//测试 2 完成
+// $container = new ContainerMe( 'AController' );
+// $abc = $container->getInstance( 'AController', array( 10 ));
+// $abc->aaa();
+// AController.class.php
+// AService.class.php
+// AModel.class.php
+// ContainerMe.class.php
+
+die();
 // $a = new A( new C(), new B() );
 
 //$class = new ReflectionClass('A');
@@ -15,6 +86,10 @@ include( 'C.class.php' );
 
 
 $container = new Container();
+
+$a['A'] = $container;
+dump($a);
+
 // var_dump( $container );
 // $container->bind( 'A', function ($container ){
 // 	return new A;
