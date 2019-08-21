@@ -1,11 +1,17 @@
 <?php
-
 header("Content-type:text/html;charset=utf-8");
+
+var_dump( $_GET );
+echo $id;
+print($id);
+var_dump($id);
+print_r($id);
+
 
 include( 'ContainerOne.class.php' );
 include( 'A.class.php' );
-// include( 'C.class.php' );
 include( 'B.class.php' );
+// include( 'C.class.php' );
 // include( 'Super.class.php' );
 // ---------------------------------------------------------------
 // include( 'AController.class.php' );
@@ -28,6 +34,24 @@ class Test {
 
 $container = new ContainerOne();
 
+
+// $container->bind( 'A' );
+// $container->bind( 'B' );
+// $container->bind( 'Test', 'B' );
+
+// $supername_1 = $container->make( 'Test' );
+// $supername_1->dazhao();
+
+// $container->getInstance( 'A', array(89798797987987) );
+echo '<br>';
+$container->run( 'A', 'methodTest', array(1321321) );
+
+
+
+// dump( $abc );
+
+// $container->getBind();
+
 // function abc( $p1, $p2 ) {
 // 	return new $p1;
 // }
@@ -44,14 +68,9 @@ $container = new ContainerOne();
 
 // $container->bind( 'Test' );
 
-$container->bind( 'A' );
-$container->bind( 'B' );
-$container->bind( 'Test', 'B' );
 
-$supername_1 = $container->make( 'Test' );
-$supername_1->dazhao();
 
-// $container->getBind();
+
 
 
 
@@ -85,63 +104,63 @@ die();
 
 
 
-$container = new Container();
+// $container = new Container();
 
-$a['A'] = $container;
-dump($a);
+// $a['A'] = $container;
+// dump($a);
 
 // var_dump( $container );
 // $container->bind( 'A', function ($container ){
 // 	return new A;
 // });
 
-$container->bind( 'C', $container );
-$container->bind( 'B', $container );
-$container->bind( 'A', $container );
+// $container->bind( 'C', $container );
+// $container->bind( 'B', $container );
+// $container->bind( 'A', $container );
 
-$container->bind( 'A', function ($container ){
-	return new A;
-});
+// $container->bind( 'A', function ($container ){
+// 	return new A;
+// });
 
 
-$param = $container->getParam();
+// $param = $container->getParam();
 
-dump( $param );
+// dump( $param );
 
 // $test = $container->make( 'A' );
 // var_dump( $test );
 // $test->say();
 die();
 
-getClassInfo( $class );
+// getClassInfo( $class );
 
-$reflector = new ReflectionClass($a);
+// $reflector = new ReflectionClass($a);
 // print_r( $reflector );echo '<br>';
 
 //获取A类的构造函数
-$constructor = $reflector->getConstructor();
+// $constructor = $reflector->getConstructor();
 // print_r( $constructor );echo '<br>';
-if ( false == empty( $constructor)) {
+// if ( false == empty( $constructor)) {
 	//获取构造函数参数
-	$dependencies = $constructor->getParameters();
+	// $dependencies = $constructor->getParameters();
 	// var_dump( $dependencies );
-	foreach ( $dependencies as $value ) {
+	// foreach ( $dependencies as $value ) {
 		// echo $value;
-		$aa = $value->getClass()->name;
-		$newObj[] = new $aa();
+		// $aa = $value->getClass()->name;
+		// $newObj[] = new $aa();
 		// var_dump( $newObj );
-	}
+	// }
 
 	// print_r( $dependencies );echo '<br>';
-} else {
+// } else {
 	//不存在构造方法则输出提示
-	echo 'not find '.$constructor->class.' __construct';
-}
+	// echo 'not find '.$constructor->class.' __construct';
+// }
 
-$refNew = $reflector->newInstanceArgs($newObj);// Test 对象
+// $refNew = $reflector->newInstanceArgs($newObj);// Test 对象
 
 
-$refNew->say();
+// $refNew->say();
 
 
 // try{
