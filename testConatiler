@@ -1,0 +1,28 @@
+public function getInstance( $className ) {
+
+		if ( $this->allService[$className] )
+			$className = $this->allService[$className];
+		
+		$reflecter = new ReflectionClass( $className );
+		
+		$constructor = $reflecter->getConstructor();
+		$this->dump( $constructor );
+		
+		$instance = array();
+
+		if ( false == $constructor ) 
+			return $reflecter->newInstanceArgs( $instance );
+
+		$parameters = $constructor->getParameters();
+		foreach ( $parameters as $param ) {
+			$class = $param->getClass();
+			if ( $class )
+				$instance[] = $this->getInstance( $class->name );
+		}
+
+		return $reflecter->newInstanceArgs( $instance );
+
+		// $this->dump( $reflecter );
+		// $this->dump( $constructor );
+		// $this->dump( $parameters );
+	}
